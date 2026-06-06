@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+dist/
+dist-ssr/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.dev*.log
+.edge-stdout.log
+.edge-stderr.log
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Test / cache
+.cache/
+.parcel-cache/
+.eslintcache
+
+# Vite
+.vite/
+
+# Edge headless artifacts (screenshot debugging)
+.edge-*/
+.edge-data*/
+.edge-check
+.edge-clean
+.edge-dump
+.edge-fresh
+.edge-measure
+.edge-mtauto
+.edge-v*/
+.screenshots/
+.dom-dump*.html
