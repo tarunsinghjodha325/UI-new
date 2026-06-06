@@ -57,7 +57,7 @@ const SavedJobsPage = () => {
 
   return (
     <div className="flex min-h-screen bg-page">
-      <Sidebar variant="savedJobs" />
+      <Sidebar />
       <main className="flex-1 lg:ml-[var(--sidebar-w,220px)] min-w-0 max-w-full overflow-x-hidden">
         <TopBar variant="tabs" />
 

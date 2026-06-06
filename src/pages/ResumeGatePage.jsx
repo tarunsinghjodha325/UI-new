@@ -88,7 +88,7 @@ const ResumeGatePage = () => {
 
   return (
     <div className="flex min-h-screen bg-page">
-      <Sidebar variant="careerGrowthOnboarding" />
+      <Sidebar />
       <main className="flex-1 lg:ml-[var(--sidebar-w,220px)] min-w-0 max-w-full overflow-x-hidden">
         <input ref={fileRef} type="file" accept=".pdf,.docx,.doc" className="hidden" onChange={handleFile} />
 

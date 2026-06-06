@@ -46,7 +46,7 @@ const AICoachPage = () => {
 
   return (
     <div className="flex min-h-screen bg-page">
-      <Sidebar variant="aiCoach" />
+      <Sidebar />
       <main className="flex-1 lg:ml-[var(--sidebar-w,220px)] min-w-0 max-w-full flex flex-col h-screen overflow-hidden">
         <TopBar variant="tabs" />
 
