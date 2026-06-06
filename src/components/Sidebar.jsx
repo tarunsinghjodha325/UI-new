@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
-  Home, Sparkles, Bookmark, Briefcase, MessageSquare, TrendingUp, Search, Bell,
+  Home, Sparkles, Bookmark, Briefcase, MessageSquare, TrendingUp, Bell,
   Target, Settings, User, Crown, BarChart3, X, PanelLeftClose, PanelLeftOpen,
   ChevronDown,
 } from 'lucide-react';
@@ -10,7 +10,7 @@ import { useLayout } from '../context/LayoutContext';
 const CANONICAL_ITEMS = [
   { key: 'home', label: 'Home', icon: Home, path: '/dashboard' },
   {
-    key: 'ai-job-match', label: 'AI Job Match', icon: Search, path: '/jobs',
+    key: 'ai-job-match', label: 'AI Job Match', icon: Target, path: '/jobs',
     children: [
       { key: 'best-matches', label: 'Best Matches', path: '/jobs', defaultActive: true },
       { key: 'high-match', label: 'High Match', path: '/jobs' },
@@ -207,15 +207,7 @@ const Sidebar = () => {
                 />
                 {item.key === 'career-growth' && !collapsed && (
                   <div className="px-3 pt-1 pb-2">
-                    <div className="bg-blue-50 rounded-lg p-3 border border-blue-100">
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-[10px] font-bold text-blue-700 uppercase tracking-wider">Growth Progress</span>
-                        <span className="text-[10px] font-bold text-blue-600">60%</span>
-                      </div>
-                      <div className="h-1.5 bg-blue-100 rounded-full overflow-hidden">
-                        <div className="h-full bg-blue-500 rounded-full" style={{ width: '60%' }} />
-                      </div>
-                    </div>
+                    <div className="bg-blue-500 rounded-lg h-2 shadow-sm" />
                   </div>
                 )}
               </React.Fragment>
