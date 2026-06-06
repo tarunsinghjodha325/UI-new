@@ -64,19 +64,19 @@ const Logo = ({ onNavigate, onLogoClick, collapsed, onToggleCollapse }) => (
     role="button"
     tabIndex={0}
     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onLogoClick?.(); }}
-    className={`flex items-center gap-2 border-b border-slate-800 lg:border-b-0 cursor-pointer hover:bg-slate-800 transition-colors ${collapsed ? 'px-3 py-5 justify-center' : 'px-5 py-5'}`}
+    className={`flex items-center gap-2 border-b border-border lg:border-b-0 cursor-pointer hover:bg-slate-50 transition-colors ${collapsed ? 'px-3 py-5 justify-center' : 'px-5 py-5'}`}
   >
     <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shrink-0">
       <Sparkles className="text-white w-5 h-5" />
     </div>
     {!collapsed && (
-      <span className="text-xl font-bold tracking-tight whitespace-nowrap text-white">
+      <span className="text-xl font-bold tracking-tight whitespace-nowrap text-slate-900">
         Career<span className="text-primary">Vibe</span>
       </span>
     )}
     <button
       onClick={(e) => { e.stopPropagation(); onNavigate?.(); }}
-      className={`ml-auto lg:hidden p-1.5 text-slate-400 hover:bg-slate-800 rounded-lg ${collapsed ? 'hidden' : ''}`}
+      className={`ml-auto lg:hidden p-1.5 text-slate-500 hover:bg-slate-100 rounded-lg ${collapsed ? 'hidden' : ''}`}
       aria-label="Close menu"
     >
       <X className="w-5 h-5" />
@@ -86,15 +86,13 @@ const Logo = ({ onNavigate, onLogoClick, collapsed, onToggleCollapse }) => (
 
 const MenuItem = ({ item, currentPath, navigate, onItemClick, collapsed }) => {
   const Icon = item.icon;
-  const isActive = currentPath.startsWith(item.path) && item.path !== '/dashboard'
-    ? currentPath === item.path
-    : currentPath === item.path;
+  const isActive = currentPath === item.path;
   const hasChildren = item.children && item.children.length > 0;
 
   const baseClasses = `relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors cursor-pointer group ${
     isActive
-      ? 'bg-primary-500/15 text-primary border-l-2 border-primary'
-      : 'text-slate-300 hover:bg-slate-800 hover:text-white border-l-2 border-transparent'
+      ? 'bg-primary-50 text-primary'
+      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
   } ${collapsed ? 'justify-center' : ''}`;
 
   const handleClick = () => {
@@ -109,9 +107,9 @@ const MenuItem = ({ item, currentPath, navigate, onItemClick, collapsed }) => {
           {Icon && <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-primary' : 'text-slate-400'}`} />}
           {!collapsed && (
             <>
-              <span className="flex-1 text-slate-200">• {item.label}</span>
+              <span className="flex-1">• {item.label}</span>
               {item.badge && (
-                <span className={`px-1.5 py-0.5 ${item.badge.color === 'green' ? 'bg-success-500/20 text-success-400' : 'bg-blue-500/20 text-blue-400'} text-[9px] font-bold rounded`}>
+                <span className={`px-1.5 py-0.5 ${item.badge.color === 'green' ? 'bg-success-50 text-success-600' : 'bg-blue-50 text-blue-600'} text-[9px] font-bold rounded`}>
                   {item.badge.text}
                 </span>
               )}
@@ -119,7 +117,7 @@ const MenuItem = ({ item, currentPath, navigate, onItemClick, collapsed }) => {
           )}
         </div>
         {isActive && !collapsed && (
-          <div className="ml-4 mt-1 space-y-0.5 border-l-2 border-slate-700 pl-2">
+          <div className="ml-4 mt-1 space-y-0.5 border-l-2 border-primary-100 pl-2">
             {item.children.map((child) => {
               const childActive = currentPath === child.path && child.key === 'best-matches';
               return (
@@ -128,11 +126,11 @@ const MenuItem = ({ item, currentPath, navigate, onItemClick, collapsed }) => {
                   onClick={() => { navigate(child.path); onItemClick?.(); }}
                   className={`flex items-center gap-2.5 px-3 py-1.5 rounded-md text-[13px] font-medium cursor-pointer transition-colors ${
                     childActive
-                      ? 'text-primary bg-primary-500/10'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                      ? 'text-primary bg-primary-50/60'
+                      : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50'
                   }`}
                 >
-                  <span className={`w-1.5 h-1.5 rounded-full ${childActive ? 'bg-primary' : 'bg-slate-500'}`} />
+                  <span className={`w-1.5 h-1.5 rounded-full ${childActive ? 'bg-primary' : 'bg-slate-300'}`} />
                   {child.label}
                 </div>
               );
@@ -148,9 +146,9 @@ const MenuItem = ({ item, currentPath, navigate, onItemClick, collapsed }) => {
       {Icon && <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-primary' : 'text-slate-400'}`} />}
       {!collapsed && (
         <>
-          <span className="flex-1 text-slate-200">• {item.label}</span>
+          <span className="flex-1">• {item.label}</span>
           {item.badge && (
-            <span className={`px-1.5 py-0.5 ${item.badge.color === 'green' ? 'bg-success-500/20 text-success-400' : 'bg-blue-500/20 text-blue-400'} text-[9px] font-bold rounded`}>
+            <span className={`px-1.5 py-0.5 ${item.badge.color === 'green' ? 'bg-success-50 text-success-600' : 'bg-blue-50 text-blue-600'} text-[9px] font-bold rounded`}>
               {item.badge.text}
             </span>
           )}
@@ -180,14 +178,14 @@ const Sidebar = () => {
     <>
       <div
         onClick={close}
-        className={`fixed inset-0 bg-black/60 z-30 lg:hidden transition-opacity duration-200 ${
+        className={`fixed inset-0 bg-slate-900/50 z-30 lg:hidden transition-opacity duration-200 ${
           mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         aria-hidden="true"
       />
 
       <aside
-        className={`fixed lg:fixed top-0 left-0 h-screen bg-slate-900 border-r border-slate-800 flex flex-col z-40 transform transition-all duration-200 ease-out ${
+        className={`fixed lg:fixed top-0 left-0 h-screen bg-white border-r border-border flex flex-col z-40 transform transition-all duration-200 ease-out ${
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 ${
           collapsed ? 'lg:w-[68px]' : 'lg:w-[220px]'
@@ -207,13 +205,13 @@ const Sidebar = () => {
             {CANONICAL_SECTIONS.map((section) => (
               <div key={section.label} className="mb-3">
                 {!collapsed && (
-                  <div className="px-3 pt-3 pb-2 text-[11px] font-extrabold text-white tracking-wider uppercase">
+                  <div className="px-3 pt-3 pb-2 text-[11px] font-extrabold text-slate-900 tracking-wider uppercase">
                     {section.label}
                   </div>
                 )}
                 {collapsed && (
                   <div className="pt-3 pb-2 flex justify-center">
-                    <span className="w-4 h-px bg-slate-700" />
+                    <span className="w-4 h-px bg-slate-200" />
                   </div>
                 )}
                 <div className="space-y-0.5">
@@ -231,78 +229,78 @@ const Sidebar = () => {
               </div>
             ))}
           </nav>
-
-          {!collapsed && (
-            <div className="shrink-0 p-4 border-t border-slate-800">
-              <div className="bg-gradient-to-br from-primary-500/20 to-primary-600/10 rounded-xl p-4 border border-primary-500/30 relative overflow-hidden">
-                <div className="relative z-10">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Crown className="w-4 h-4 text-primary" />
-                    <span className="text-[13px] font-bold text-white">{CANONICAL_PREMIUM.title}</span>
-                  </div>
-                  <ul className="text-[11px] text-slate-300 space-y-1.5 mb-3 leading-relaxed">
-                    {CANONICAL_PREMIUM.bullets.map((b, i) => (
-                      <li key={i} className="flex items-start gap-1.5">
-                        <span className="text-primary mt-0.5 shrink-0">✓</span>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    onClick={() => { navigate('/settings'); close(); }}
-                    className="w-full py-2.5 bg-primary hover:bg-primary-600 text-white text-[12px] font-bold rounded-lg transition-colors flex items-center justify-center gap-1"
-                  >
-                    {CANONICAL_PREMIUM.cta} <span className="text-base leading-none">→</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {collapsed && (
-            <div className="shrink-0 p-2 border-t border-slate-800 flex justify-center">
-              <button
-                onClick={() => { navigate('/settings'); close(); }}
-                className="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-primary-600 transition-colors"
-                title={CANONICAL_PREMIUM.cta}
-                aria-label={CANONICAL_PREMIUM.cta}
-              >
-                <Crown className="w-4 h-4" />
-              </button>
-            </div>
-          )}
         </div>
 
         {!collapsed && (
-          <div className="shrink-0 p-4 border-t border-slate-800">
-            <div className="bg-slate-800/60 rounded-xl p-4 border border-slate-700">
+          <div className="shrink-0 p-4 border-t border-border">
+            <div className="bg-white rounded-xl p-4 border border-border">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-7 h-7 bg-primary-500/20 rounded-lg flex items-center justify-center">
+                <div className="w-7 h-7 bg-primary-50 rounded-lg flex items-center justify-center">
                   <BarChart3 className="w-4 h-4 text-primary" />
                 </div>
-                <span className="text-[13px] font-bold text-white">Your Career Score</span>
+                <span className="text-[13px] font-bold text-slate-900">Your Career Score</span>
               </div>
               <div className="flex items-end gap-2 mb-2">
-                <span className="text-3xl font-extrabold text-white">{CANONICAL_CAREER_SCORE.value}</span>
-                <span className="text-[10px] font-bold text-success-400 bg-success-500/20 px-1.5 py-0.5 rounded mb-1">
+                <span className="text-3xl font-extrabold text-slate-900">{CANONICAL_CAREER_SCORE.value}</span>
+                <span className="text-[10px] font-bold text-success-600 bg-success-50 px-1.5 py-0.5 rounded mb-1">
                   {CANONICAL_CAREER_SCORE.label}
                 </span>
               </div>
-              <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden mb-2">
-                <div className="h-full bg-success-500" style={{ width: `${CANONICAL_CAREER_SCORE.percent}%` }} />
+              <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden mb-2">
+                <div className="h-full bg-success" style={{ width: `${CANONICAL_CAREER_SCORE.percent}%` }} />
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-[10px] font-bold text-slate-400">Improve Now →</span>
-                <span className="text-[10px] font-bold text-slate-500">{CANONICAL_CAREER_SCORE.percent}%</span>
+                <span className="text-[10px] font-bold text-slate-500">Improve Now →</span>
+                <span className="text-[10px] font-bold text-slate-400">{CANONICAL_CAREER_SCORE.percent}%</span>
               </div>
             </div>
           </div>
         )}
 
-        <div className="hidden lg:flex shrink-0 p-3 border-t border-slate-800 justify-center">
+        {!collapsed && (
+          <div className="shrink-0 mt-auto p-4 border-t border-border">
+            <div className="bg-primary-50/70 rounded-xl p-4 border border-primary-100/80 relative overflow-hidden">
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-3">
+                  <Crown className="w-4 h-4 text-primary" />
+                  <span className="text-[13px] font-bold text-slate-900">{CANONICAL_PREMIUM.title}</span>
+                </div>
+                <ul className="text-[11px] text-slate-600 space-y-1.5 mb-3 leading-relaxed">
+                  {CANONICAL_PREMIUM.bullets.map((b, i) => (
+                    <li key={i} className="flex items-start gap-1.5">
+                      <span className="text-primary mt-0.5 shrink-0">✓</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={() => { navigate('/settings'); close(); }}
+                  className="w-full py-2.5 bg-primary hover:bg-primary-600 text-white text-[12px] font-bold rounded-lg transition-colors flex items-center justify-center gap-1"
+                >
+                  {CANONICAL_PREMIUM.cta} <span className="text-base leading-none">→</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {collapsed && (
+          <div className="shrink-0 mt-auto p-2 border-t border-border flex justify-center">
+            <button
+              onClick={() => { navigate('/settings'); close(); }}
+              className="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-primary-600 transition-colors"
+              title={CANONICAL_PREMIUM.cta}
+              aria-label={CANONICAL_PREMIUM.cta}
+            >
+              <Crown className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+
+        <div className="hidden lg:flex shrink-0 p-3 border-t border-border justify-center">
           <button
             onClick={toggleSidebar}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors text-xs font-medium"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-colors text-xs font-medium"
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
